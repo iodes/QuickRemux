@@ -1,12 +1,28 @@
-﻿<Window x:Class="QuickRemux.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Title="QuickRemux" Height="100" Width="525" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+﻿<Window
+    x:Class="QuickRemux.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="QuickRemux"
+    Width="500"
+    Height="350"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
 
     <Grid>
-        <ProgressBar Value="{Binding Progress, Mode=OneWay}" Maximum="100"/>
+        <ListView HorizontalContentAlignment="Stretch" ItemsSource="{Binding Remuxers}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <ProgressBar
+                            Height="20"
+                            Maximum="100"
+                            Value="{Binding Progress, Mode=OneWay}" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>

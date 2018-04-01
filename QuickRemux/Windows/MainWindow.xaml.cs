@@ -1,8 +1,6 @@
 ﻿using QuickRemux.Engine;
-using System.Collections.Generic;
-using System.ComponentModel;
+using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -13,48 +11,43 @@ namespace QuickRemux
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MKVRemuxer Remuxer { get; } = new MKVRemuxer();
+        #region 속성
+        public ObservableCollection<MKVRemuxer> Remuxers { get; } = new ObservableCollection<MKVRemuxer>();
+        #endregion
 
+        #region 생성자
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = Remuxer;
+            DataContext = this;
 
             Loaded += MainWindow_LoadedAsync;
-            Remuxer.PropertyChanged += Remuxer_PropertyChanged;
         }
+        #endregion
 
-        private void Remuxer_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (Remuxer.Status)
-            {
-                case RemuxerStatus.Failed:
-                    MessageBox.Show($"{Path.GetFileName(Remuxer.Input)}\n변환 오류가 발생했습니다.", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
-                    break;
-            }
-        }
-
+        #region 이벤트
         private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
+            var mkvFiles = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.mkv", SearchOption.TopDirectoryOnly);
+            foreach (var file in mkvFiles)
+            {
+                Remuxers.Add(new MKVRemuxer
+                {
+                    Input = file,
+                    Output = $"{file}.mp4"
+                });
+            }
+
             await Task.Run(() =>
             {
-                var mkvFiles = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.mkv", SearchOption.TopDirectoryOnly);
-                var workQeueue = new Queue<string>(mkvFiles);
-
-                int count = 0;
-                while (workQeueue.Any())
+                Parallel.ForEach(Remuxers, new ParallelOptions { MaxDegreeOfParallelism = 2 }, remuxer =>
                 {
-                    var target = workQeueue.Dequeue();
-                    Dispatcher.Invoke(() => Title = $"[{++count}/{mkvFiles.Count()}] {Path.GetFileName(target)}");
-
-                    Remuxer.Input = target;
-                    Remuxer.Output = $"{target}.mp4";
-                    Remuxer.Start();
-                }
+                    remuxer.Start();
+                });
             });
 
-            MessageBox.Show("작업을 완료했습니다.", "알림", MessageBoxButton.OK, MessageBoxImage.Information);
             Application.Current.Shutdown();
         }
+        #endregion
     }
 }

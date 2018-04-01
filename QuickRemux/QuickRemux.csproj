@@ -54,6 +54,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\CircularProgress.cs" />
+    <Compile Include="Converters\BaseValueConverter.cs" />
+    <Compile Include="Converters\PathToNameConverter.cs" />
+    <Compile Include="Converters\StatusToColorConverter.cs" />
     <Compile Include="Supports\EnvironmentSupport.cs" />
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

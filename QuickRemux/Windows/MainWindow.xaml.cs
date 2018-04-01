@@ -1,7 +1,8 @@
-﻿using QuickRemux.Engine;
+﻿using Microsoft.Win32;
+using QuickRemux.Engine;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Threading.Tasks;
+using System.Linq;
+using System.Threading;
 using System.Windows;
 
 namespace QuickRemux
@@ -11,6 +12,10 @@ namespace QuickRemux
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region 변수
+        SemaphoreSlim _semaphore;
+        #endregion
+
         #region 속성
         public ObservableCollection<MKVRemuxer> Remuxers { get; } = new ObservableCollection<MKVRemuxer>();
         #endregion
@@ -19,34 +24,76 @@ namespace QuickRemux
         public MainWindow()
         {
             InitializeComponent();
+            SetSemaphoreCount(2);
             DataContext = this;
-
-            Loaded += MainWindow_LoadedAsync;
         }
         #endregion
 
         #region 이벤트
-        private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
+        private void ListWork_Drop(object sender, DragEventArgs e)
         {
-            var mkvFiles = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.mkv", SearchOption.TopDirectoryOnly);
-            foreach (var file in mkvFiles)
+            Enqueue(e.Data.GetData(DataFormats.FileDrop) as string[]);
+        }
+
+        private void ContextAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var openDialog = new OpenFileDialog
             {
-                Remuxers.Add(new MKVRemuxer
+                Filter = "MKV 파일|*.mkv|모든 파일|*.*"
+            };
+
+            if (openDialog.ShowDialog() == true)
+            {
+                Enqueue(openDialog.FileNames);
+            }
+        }
+
+        private void ContextClear_Click(object sender, RoutedEventArgs e)
+        {
+            Clear();
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+        #endregion
+
+        #region 내부 함수
+        private void Clear()
+        {
+            foreach (var remuxer in Remuxers.Where(x => x.Status != RemuxerStatus.Standby && x.Status != RemuxerStatus.Running).ToList())
+            {
+                Remuxers.Remove(remuxer);
+            }
+        }
+
+        private void Enqueue(string[] targets)
+        {
+            foreach (var file in targets.Where(x => x.EndsWith(".mkv")))
+            {
+                var mkvRemuxer = new MKVRemuxer
                 {
                     Input = file,
                     Output = $"{file}.mp4"
-                });
-            }
+                };
 
-            await Task.Run(() =>
-            {
-                Parallel.ForEach(Remuxers, new ParallelOptions { MaxDegreeOfParallelism = 2 }, remuxer =>
+                Remuxers.Add(mkvRemuxer);
+
+                var thread = new Thread(() =>
                 {
-                    remuxer.Start();
+                    _semaphore.Wait();
+                    mkvRemuxer.Start();
+                    _semaphore.Release();
                 });
-            });
 
-            Application.Current.Shutdown();
+                thread.Start();
+            }
+        }
+
+        private void SetSemaphoreCount(int value)
+        {
+            _semaphore = new SemaphoreSlim(value);
         }
         #endregion
     }

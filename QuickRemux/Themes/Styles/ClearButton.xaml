@@ -12,10 +12,12 @@
                         Background="{TemplateBinding Background}">
                         <ContentPresenter />
                     </Border>
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="root" Property="Background" Value="#33FFFFFF" />
                         </Trigger>
+
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="root" Property="Background" Value="#66FFFFFF" />
                         </Trigger>

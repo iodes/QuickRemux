@@ -30,14 +30,12 @@
                                         VerticalAlignment="Center"
                                         Foreground="{StaticResource Brush.Window.Title.Foreground}"
                                         Text="{TemplateBinding Title}" />
-
                                     <Button
                                         Padding="10"
                                         HorizontalAlignment="Right"
                                         Command="{x:Static SystemCommands.CloseWindowCommand}"
                                         Style="{StaticResource ClearButtonStyle}"
                                         WindowChrome.IsHitTestVisibleInChrome="True">
-
                                         <Path
                                             Data="{StaticResource Path.Close}"
                                             Fill="White"

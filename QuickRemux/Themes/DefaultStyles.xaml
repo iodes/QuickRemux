@@ -2,5 +2,6 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/QuickRemux;component/Themes/Styles/ClearButton.xaml" />
+        <ResourceDictionary Source="/QuickRemux;component/Themes/Styles/FlatScrollBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

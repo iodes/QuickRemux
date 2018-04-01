@@ -21,6 +21,7 @@
             Grid.Row="1"
             HorizontalContentAlignment="Stretch"
             AllowDrop="True"
+            BorderThickness="0"
             Drop="ListWork_Drop"
             ItemsSource="{Binding Remuxers}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">

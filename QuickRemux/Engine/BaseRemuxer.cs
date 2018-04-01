@@ -67,16 +67,6 @@ namespace QuickRemux.Engine
         {
             Initialize();
         }
-
-        public BaseRemuxer(string input) : this()
-        {
-            Input = Input;
-        }
-
-        public BaseRemuxer(string input, string output) : this(input)
-        {
-            Output = output;
-        }
         #endregion
 
         #region 가상 함수

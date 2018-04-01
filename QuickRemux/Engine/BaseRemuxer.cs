@@ -190,6 +190,7 @@ namespace QuickRemux.Engine
             }
             else
             {
+                CurrentProgress = 100;
                 _lastStatus = RemuxerStatus.Failed;
             }
         }

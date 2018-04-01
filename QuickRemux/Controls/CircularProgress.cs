@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 namespace QuickRemux.Controls
@@ -13,6 +14,12 @@ namespace QuickRemux.Controls
             get { return (double)GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
         }
+
+        public double AnimatedValue
+        {
+            get { return (double)GetValue(AnimatedValueProperty); }
+            set { SetValue(AnimatedValueProperty, value); }
+        }
         #endregion
 
         #region 의존성 속성
@@ -20,7 +27,10 @@ namespace QuickRemux.Controls
             new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender, null, new CoerceValueCallback(CoerceValue));
 
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register("Value", typeof(double), typeof(CircularProgress), valueMetadata);
+            DependencyProperty.Register(nameof(Value), typeof(double), typeof(CircularProgress), valueMetadata);
+
+        public static readonly DependencyProperty AnimatedValueProperty =
+            DependencyProperty.Register(nameof(AnimatedValue), typeof(double), typeof(CircularProgress), new PropertyMetadata(0d, AnimatedValueChanged));
         #endregion
 
         #region 내부 함수
@@ -31,6 +41,30 @@ namespace QuickRemux.Controls
             val = Math.Max(val, 0.0);
 
             return val;
+        }
+
+        public static void AnimatedValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        {
+            var control = (CircularProgress)sender;
+            control.AnimatedValueChanged();
+        }
+
+        private void AnimatedValueChanged()
+        {
+            var animation = new DoubleAnimation
+            {
+                From = Value,
+                To = AnimatedValue,
+                EasingFunction = new ExponentialEase { EasingMode = EasingMode.EaseOut },
+                Duration = new Duration(TimeSpan.FromMilliseconds(500))
+            };
+
+            Storyboard.SetTarget(animation, this);
+            Storyboard.SetTargetProperty(animation, new PropertyPath(ValueProperty));
+
+            var sb = new Storyboard();
+            sb.Children.Add(animation);
+            sb.Begin();
         }
         #endregion
 

@@ -33,6 +33,7 @@
                         x:Name="contextAdd"
                         Click="ContextAdd_Click"
                         Header="변환할 파일 추가" />
+
                     <MenuItem
                         x:Name="contextClear"
                         Click="ContextClear_Click"
@@ -59,9 +60,9 @@
                             Width="20"
                             Height="20"
                             Margin="0,0,5,0"
+                            AnimatedValue="{Binding Progress, Mode=OneWay}"
                             Fill="{Binding Status, Converter={converters:StatusToColorConverter}}"
-                            Stroke="{Binding Status, Converter={converters:StatusToColorConverter}}"
-                            Value="{Binding Progress, Mode=OneWay}" />
+                            Stroke="{Binding Status, Converter={converters:StatusToColorConverter}}" />
 
                         <TextBlock
                             Grid.Column="1"

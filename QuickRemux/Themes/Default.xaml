@@ -35,6 +35,7 @@
                                             VerticalAlignment="Center"
                                             Foreground="{StaticResource Brush.Window.Title.Foreground}"
                                             Text="{TemplateBinding Title}" />
+
                                         <Button
                                             Padding="10"
                                             HorizontalAlignment="Right"

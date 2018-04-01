@@ -10,6 +10,7 @@
     Title="QuickRemux"
     Width="500"
     Height="350"
+    Icon="/QuickRemux;component/Images/Logo.png"
     ResizeMode="CanMinimize"
     Style="{StaticResource DefaultWindowStyle}"
     WindowStartupLocation="CenterScreen"

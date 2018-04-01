@@ -76,7 +76,10 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid Margin="110,40" Visibility="{Binding Remuxers.Count, Converter={converters:CountToVisibilityConverter}}">
+        <Grid
+            Margin="110,40"
+            IsHitTestVisible="False"
+            Visibility="{Binding Remuxers.Count, Converter={converters:CountToVisibilityConverter}}">
             <Rectangle
                 RadiusX="10"
                 RadiusY="10"

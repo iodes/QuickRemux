@@ -56,6 +56,7 @@
     </ApplicationDefinition>
     <Compile Include="Controls\CircularProgress.cs" />
     <Compile Include="Converters\BaseValueConverter.cs" />
+    <Compile Include="Converters\CountToVisibilityConverter.cs" />
     <Compile Include="Converters\PathToNameConverter.cs" />
     <Compile Include="Converters\StatusToColorConverter.cs" />
     <Compile Include="Supports\EnvironmentSupport.cs" />

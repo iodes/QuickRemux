@@ -75,5 +75,21 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Grid Margin="110,40" Visibility="{Binding Remuxers.Count, Converter={converters:CountToVisibilityConverter}}">
+            <Rectangle
+                RadiusX="10"
+                RadiusY="10"
+                Stroke="#B2B6B6B6"
+                StrokeDashArray="10.0 10.0" />
+
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="16"
+                FontWeight="Bold"
+                Foreground="#FFB6B6B6"
+                Text="변환할 파일을 드래그 앤 드롭" />
+        </Grid>
     </Grid>
 </local:WindowBase>

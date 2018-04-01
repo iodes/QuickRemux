@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using QuickRemux.Engine;
+using QuickRemux.Supports;
 using QuickRemux.Windows;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace QuickRemux
         public MainWindow()
         {
             InitializeComponent();
-            SetSemaphoreCount(2);
+            SetSemaphoreCount(ProcessorSupport.GetAvailableCount());
             DataContext = this;
         }
         #endregion

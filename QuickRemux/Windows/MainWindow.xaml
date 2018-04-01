@@ -25,6 +25,7 @@
             Drop="ListWork_Drop"
             ItemContainerStyle="{StaticResource SimpleListViewContainerStyle}"
             ItemsSource="{Binding Remuxers}"
+            ScrollViewer.CanContentScroll="False"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
             <ListView.ContextMenu>

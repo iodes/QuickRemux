@@ -59,6 +59,7 @@
     <Compile Include="Converters\PathToNameConverter.cs" />
     <Compile Include="Converters\StatusToColorConverter.cs" />
     <Compile Include="Supports\EnvironmentSupport.cs" />
+    <Compile Include="Supports\ProcessorSupport.cs" />
     <Compile Include="Windows\WindowBase.cs" />
     <Page Include="Themes\DefaultPalette.xaml">
       <SubType>Designer</SubType>

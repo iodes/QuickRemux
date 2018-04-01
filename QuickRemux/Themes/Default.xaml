@@ -24,25 +24,31 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
 
-                                <Grid Grid.Row="0" Background="{StaticResource Brush.Window.Title.Background}">
-                                    <TextBlock
-                                        Margin="10,0,0,0"
-                                        VerticalAlignment="Center"
-                                        Foreground="{StaticResource Brush.Window.Title.Foreground}"
-                                        Text="{TemplateBinding Title}" />
-                                    <Button
-                                        Padding="10"
-                                        HorizontalAlignment="Right"
-                                        Command="{x:Static SystemCommands.CloseWindowCommand}"
-                                        Style="{StaticResource ClearButtonStyle}"
-                                        WindowChrome.IsHitTestVisibleInChrome="True">
-                                        <Path
-                                            Data="{StaticResource Path.Close}"
-                                            Fill="White"
-                                            IsHitTestVisible="False"
-                                            Stretch="Uniform" />
-                                    </Button>
-                                </Grid>
+                                <Border
+                                    Grid.Row="0"
+                                    Background="{StaticResource Brush.Window.Title.Background}"
+                                    BorderBrush="{StaticResource Brush.Window.Border}"
+                                    BorderThickness="0,0,0,1">
+                                    <Grid>
+                                        <TextBlock
+                                            Margin="10,0,0,0"
+                                            VerticalAlignment="Center"
+                                            Foreground="{StaticResource Brush.Window.Title.Foreground}"
+                                            Text="{TemplateBinding Title}" />
+                                        <Button
+                                            Padding="10"
+                                            HorizontalAlignment="Right"
+                                            Command="{x:Static SystemCommands.CloseWindowCommand}"
+                                            Style="{StaticResource ClearButtonStyle}"
+                                            WindowChrome.IsHitTestVisibleInChrome="True">
+                                            <Path
+                                                Data="{StaticResource Path.Close}"
+                                                Fill="White"
+                                                IsHitTestVisible="False"
+                                                Stretch="Uniform" />
+                                        </Button>
+                                    </Grid>
+                                </Border>
 
                                 <ContentPresenter
                                     Grid.Row="1"

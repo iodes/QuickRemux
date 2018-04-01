@@ -23,6 +23,7 @@
             AllowDrop="True"
             BorderThickness="0"
             Drop="ListWork_Drop"
+            ItemContainerStyle="{StaticResource SimpleListViewContainerStyle}"
             ItemsSource="{Binding Remuxers}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
@@ -38,13 +39,6 @@
                         Header="완료된 항목 삭제" />
                 </ContextMenu>
             </ListView.ContextMenu>
-
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="BorderBrush" Value="{StaticResource Brush.Main.ListView.Border}" />
-                    <Setter Property="BorderThickness" Value="0,0,0,1" />
-                </Style>
-            </ListView.ItemContainerStyle>
 
             <ListView.ItemTemplate>
                 <DataTemplate>

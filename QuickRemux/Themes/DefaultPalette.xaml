@@ -6,7 +6,6 @@
 
     <SolidColorBrush x:Key="Brush.Main.Ellipse.Background" Color="#FFE2E2E2" />
     <SolidColorBrush x:Key="Brush.Main.ListView.Foreground" Color="#FF575757" />
-    <SolidColorBrush x:Key="Brush.Main.ListView.Border" Color="#FFE8E8E8" />
 
     <SolidColorBrush x:Key="Brush.Status.Standby" Color="#00000000" />
     <SolidColorBrush x:Key="Brush.Status.Running" Color="#FF5EA6D4" />

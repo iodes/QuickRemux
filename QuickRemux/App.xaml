@@ -4,5 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     StartupUri="Windows/MainWindow.xaml">
 
-    <Application.Resources />
+    <Application.Resources>
+        <ResourceDictionary Source="Themes/Default.xaml" />
+    </Application.Resources>
 </Application>

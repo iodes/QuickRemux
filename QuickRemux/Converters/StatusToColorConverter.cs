@@ -1,5 +1,6 @@
 ﻿using QuickRemux.Engine;
 using System;
+using System.Windows;
 using System.Windows.Media;
 
 namespace QuickRemux.Converters
@@ -14,16 +15,16 @@ namespace QuickRemux.Converters
             {
                 default:
                 case RemuxerStatus.Standby:
-                    return converter.ConvertFromString("#00000000") as Brush;
+                    return Application.Current.FindResource("Brush.Status.Standby") as Brush;
 
                 case RemuxerStatus.Running:
-                    return converter.ConvertFromString("#5EA6D4") as Brush;
+                    return Application.Current.FindResource("Brush.Status.Running") as Brush;
 
                 case RemuxerStatus.Succeed:
-                    return converter.ConvertFromString("#50B92D") as Brush;
+                    return Application.Current.FindResource("Brush.Status.Succeed") as Brush;
 
                 case RemuxerStatus.Failed:
-                    return converter.ConvertFromString("#E36543") as Brush;
+                    return Application.Current.FindResource("Brush.Status.Failed") as Brush;
             }
         }
 

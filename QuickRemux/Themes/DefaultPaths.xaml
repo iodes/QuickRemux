@@ -1,0 +1,4 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StreamGeometry x:Key="Path.Close">M0.70709896,0 L6.8942175,6.1869236 13.081338,0 13.788438,0.70707721 7.6013174,6.8940001 13.788438,13.080923 13.081338,13.788 6.8942175,7.6010771 0.70709896,13.788 0,13.080923 6.1871195,6.8940001 0,0.70707721 z</StreamGeometry>
+</ResourceDictionary>
